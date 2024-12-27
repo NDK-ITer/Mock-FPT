@@ -1,3 +1,9 @@
-buildCommand: |
-  chmod +x mvnw
-  ./mvnw clean package
+services:
+  - type: web
+    name: my-java-app
+    env: java
+    buildCommand: |
+      chmod +x mvnw
+      ./mvnw clean package
+    startCommand: ./mvnw spring-boot:run
+    publishDirectory: target
