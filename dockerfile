@@ -1,14 +1,26 @@
-# Sử dụng image Java làm base image
-FROM openjdk:17-jdk-slim
 
-# Cài đặt thư mục làm việc trong container
+FROM maven:3.8.4-openjdk-21-slim as build
+
 WORKDIR /app
 
-# Copy file JAR vào container
-COPY target/webclient-0.0.1-SNAPSHOT.jar /app/webclient-0.0.1-SNAPSHOT.jar
 
-# Mở cổng ứng dụng (mặc định cổng Spring Boot là 8080)
-EXPOSE 7000
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Lệnh chạy ứng dụng Spring Boot
+
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+
+COPY --from=build /app/target/webclient-0.0.1-SNAPSHOT.jar /app/webclient-0.0.1-SNAPSHOT.jar
+
+
+EXPOSE 8080
+
+
 CMD ["java", "-jar", "webclient-0.0.1-SNAPSHOT.jar"]
