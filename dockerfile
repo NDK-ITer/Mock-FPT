@@ -12,10 +12,10 @@ WORKDIR /app
 COPY . /app
 
 # Biên dịch ứng dụng Java với Maven (hoặc Gradle) nếu cần
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw clean package
 
 # Expose port nếu ứng dụng sử dụng port cụ thể (ví dụ 8080)
 EXPOSE 8080
 
 # Lệnh để chạy ứng dụng khi container khởi động
-CMD ["java", "-jar", "target/your-app.jar"]
+CMD ["java", "-jar", "target/webclient-0.0.1-SNAPSHOT.jar"]
