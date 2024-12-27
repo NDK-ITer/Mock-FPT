@@ -1,5 +1,5 @@
 # Sử dụng image Java làm base image
-FROM openjdk:21-jdk-slim
+FROM openjdk:17-jdk-slim
 
 # Cài đặt thư mục làm việc trong container
 WORKDIR /app
