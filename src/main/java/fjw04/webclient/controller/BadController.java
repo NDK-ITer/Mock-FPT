@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class BadController {
     @GetMapping("/404")
-    public String getMethodName() {
-        return "404";
+    public String userBad() {
+        return "user/404";
     }
     
 }
